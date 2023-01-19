@@ -1,0 +1,1054 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Switchee Client API",
+    "version" : "2.0"
+  },
+  "servers" : [ {
+    "url" : "https://api.switchee.co"
+  } ],
+  "paths" : {
+    "/v2.0/properties/byUPRN/{uprn}" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "uprn",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Property"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "client-api-authorizer" : [ "https://api.switchee.co/api.client" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      }
+    },
+    "/v2.0/properties/{propertyUID}" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "propertyUID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Property"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "client-api-authorizer" : [ "https://api.switchee.co/api.client" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "patch" : {
+        "parameters" : [ {
+          "name" : "propertyUID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json-patch+json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PropertyReferenceRequest"
+              }
+            },
+            "application/*+json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PropertyReferenceRequest"
+              }
+            },
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PropertyReferenceRequest"
+              }
+            },
+            "text/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PropertyReferenceRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "content" : { }
+          },
+          "400" : {
+            "description" : "400 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "content" : { }
+          }
+        },
+        "security" : [ {
+          "client-api-authorizer" : [ "https://api.switchee.co/api.client" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      }
+    },
+    "/v2.0/properties" : {
+      "get" : {
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Properties"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "client-api-authorizer" : [ "https://api.switchee.co/api.client" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      }
+    },
+    "/v2.0/properties/insights" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "from",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "to",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "continuationToken",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DailyPropertyInsightsModel"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "client-api-authorizer" : [ "https://api.switchee.co/api.client" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      }
+    },
+    "/v2.0/properties/{propertyUID}/insights" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "propertyUID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "continuationToken",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "from",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "to",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DailyPropertyInsightsModel"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "client-api-authorizer" : [ "https://api.switchee.co/api.client" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "HeatingZoneConfigurationRequest" : {
+        "type" : "object",
+        "properties" : {
+          "z" : {
+            "type" : "integer",
+            "description" : "Heating zone",
+            "format" : "int32"
+          },
+          "c" : {
+            "type" : "array",
+            "description" : "Heating commands",
+            "items" : {
+              "$ref" : "#/components/schemas/HeatingConfigurationRequest"
+            }
+          }
+        },
+        "additionalProperties" : false
+      },
+      "CreateScheduleRequest" : {
+        "type" : "object",
+        "properties" : {
+          "adaptedScheduleId" : {
+            "type" : "string",
+            "description" : "The id of the schedule adapted from for reference",
+            "format" : "uuid"
+          },
+          "w" : {
+            "type" : "array",
+            "description" : "Water schedule",
+            "items" : {
+              "$ref" : "#/components/schemas/HotWaterConfigurationRequest"
+            }
+          },
+          "h" : {
+            "type" : "array",
+            "description" : "Heating schedule",
+            "items" : {
+              "$ref" : "#/components/schemas/HeatingZoneConfigurationRequest"
+            }
+          }
+        },
+        "additionalProperties" : false
+      },
+      "CreateScheduleCommandResponse" : {
+        "type" : "object",
+        "properties" : {
+          "guid" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "errorMessages" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "GetPropertiesResponse" : {
+        "type" : "object",
+        "properties" : {
+          "properties" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GetPropertyResponse"
+            }
+          }
+        },
+        "additionalProperties" : false
+      },
+      "HotWaterConfigurationResponse" : {
+        "type" : "object",
+        "properties" : {
+          "d" : {
+            "type" : "integer",
+            "description" : "Logical day of week (00-06 = Mon-Sun)",
+            "format" : "int32"
+          },
+          "h" : {
+            "type" : "integer",
+            "description" : "Hour of the day",
+            "format" : "int32"
+          },
+          "m" : {
+            "type" : "integer",
+            "description" : "Minutes",
+            "format" : "int32"
+          },
+          "s" : {
+            "type" : "integer",
+            "description" : "Water state 1 = on or 0 = off",
+            "format" : "int32"
+          },
+          "t" : {
+            "type" : "string",
+            "description" : "DSR schedule event type\r\nValues: offpeak, peak"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "WaterState" : {
+        "type" : "string",
+        "description" : "<p>Members:</p><ul><li><i>Off</i> - Hot Water heating is off </li> <li><i>On</i> - Hot Water heating is on </li> </ul>",
+        "enum" : [ "Off", "On" ]
+      },
+      "Properties" : {
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Property"
+            }
+          },
+          "links" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Link"
+            }
+          }
+        },
+        "additionalProperties" : false
+      },
+      "Pagination" : {
+        "type" : "object",
+        "properties" : {
+          "continuationToken" : {
+            "type" : "string",
+            "description" : "Token that is use for pagination"
+          },
+          "hasNext" : {
+            "type" : "boolean",
+            "description" : "True if there is more data to return"
+          },
+          "pageSize" : {
+            "type" : "integer",
+            "description" : "Max number of records returned per page",
+            "format" : "int32"
+          },
+          "pageResultCount" : {
+            "type" : "integer",
+            "description" : "Number of records returned",
+            "format" : "int32"
+          },
+          "next" : {
+            "type" : "string",
+            "description" : "Formatted call to return the next page of results"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "GetSensorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "hubSensorData" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/HubSensorData"
+            }
+          },
+          "deviceSensorData" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/DeviceSensorData"
+            }
+          },
+          "mBusSensorData" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/MBusSensorData"
+            }
+          }
+        },
+        "additionalProperties" : false
+      },
+      "HeatingConfigurationResponse" : {
+        "type" : "object",
+        "properties" : {
+          "d" : {
+            "type" : "integer",
+            "description" : "Logical day of week (00-06 = Mon-Sun)",
+            "format" : "int32"
+          },
+          "h" : {
+            "type" : "integer",
+            "description" : "Hour of the day",
+            "format" : "int32"
+          },
+          "m" : {
+            "type" : "integer",
+            "description" : "Minutes",
+            "format" : "int32"
+          },
+          "tt" : {
+            "type" : "integer",
+            "description" : "Heating temperature on or of",
+            "format" : "int32"
+          },
+          "t" : {
+            "type" : "string",
+            "description" : "DSR schedule event type\r\nValues: offpeak, peak"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "HubSensorData" : {
+        "type" : "object",
+        "properties" : {
+          "ts" : {
+            "type" : "string",
+            "description" : "UTC time stamp when message is occurred"
+          },
+          "dci" : {
+            "type" : "string",
+            "description" : "Version of this message type,\r\nshould correspond to JSON Schema for validation."
+          },
+          "dcv" : {
+            "type" : "integer",
+            "description" : "Version of this message type,\r\nshould correspond to JSON Schema for validation.",
+            "format" : "int32"
+          },
+          "pid" : {
+            "type" : "integer",
+            "description" : "Property Id.",
+            "format" : "int32"
+          },
+          "sn" : {
+            "type" : "string",
+            "description" : "The device serial number in 6 alphanumeric characters."
+          },
+          "fm" : {
+            "type" : "integer",
+            "description" : "Flowmeter reading",
+            "format" : "int32"
+          },
+          "ti" : {
+            "type" : "number",
+            "description" : "Hub Internal Temperature: 0.1 resolution, maximum value: (99.9).",
+            "format" : "double"
+          },
+          "hi" : {
+            "type" : "number",
+            "description" : "Hub Internal Relative Humidity: 0.1 resolution, maximum value: (99.9).",
+            "format" : "double"
+          },
+          "tt1" : {
+            "type" : "integer",
+            "description" : "Target Temperature Zone1",
+            "format" : "int32"
+          },
+          "tt2" : {
+            "type" : "integer",
+            "description" : "Target Temperature Zone2",
+            "format" : "int32"
+          },
+          "hc1" : {
+            "type" : "integer",
+            "description" : "Heating Control Zone1 Mode",
+            "format" : "int32"
+          },
+          "hc2" : {
+            "type" : "integer",
+            "description" : "Heating Control Zone2 Mode",
+            "format" : "int32"
+          },
+          "wc" : {
+            "type" : "integer",
+            "description" : "Hot Water Control Mode",
+            "format" : "int32"
+          },
+          "hw" : {
+            "type" : "integer",
+            "description" : "Hot water state, 0 = Off, 1 = On",
+            "format" : "int32"
+          },
+          "ht1" : {
+            "type" : "integer",
+            "description" : "Heating state for zone 1, 0 = Off, 1 = On",
+            "format" : "int32"
+          },
+          "ht2" : {
+            "type" : "integer",
+            "description" : "Heating state for zone 2, 0 = Off, 1 = On",
+            "format" : "int32"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "Property" : {
+        "type" : "object",
+        "properties" : {
+          "uid" : {
+            "type" : "string",
+            "description" : "Switchee unique identifier for the property",
+            "format" : "uuid"
+          },
+          "propertyRef" : {
+            "type" : "string",
+            "description" : "Housing provider property reference (null if not set)"
+          },
+          "uprn" : {
+            "type" : "string",
+            "description" : "Unique Property Reference Number, as managed nationally for the UK by GeoPlace"
+          },
+          "addressLine1" : {
+            "type" : "string",
+            "description" : "Address Line 1"
+          },
+          "addressLine2" : {
+            "type" : "string",
+            "description" : "Address Line 2"
+          },
+          "addressLine3" : {
+            "type" : "string",
+            "description" : "Address Line 3"
+          },
+          "postcode" : {
+            "type" : "string",
+            "description" : "Postcode"
+          },
+          "area" : {
+            "type" : "string",
+            "description" : "Area"
+          },
+          "city" : {
+            "type" : "string",
+            "description" : "City"
+          },
+          "country" : {
+            "type" : "string",
+            "description" : "Country"
+          },
+          "links" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Link"
+            }
+          }
+        },
+        "additionalProperties" : false
+      },
+      "DeviceSensorData" : {
+        "type" : "object",
+        "properties" : {
+          "sn" : {
+            "type" : "string",
+            "description" : "The sensor serial number"
+          },
+          "rm" : {
+            "type" : "string",
+            "description" : "Sensor location - room name"
+          },
+          "ti" : {
+            "type" : "number",
+            "description" : "Internal Temperature from the sensor unit: 0.1 resolution, maximum value: (99.9).",
+            "format" : "double"
+          },
+          "tw" : {
+            "type" : "number",
+            "description" : "Wall Temperature from the sensor unit: 0.1 resolution, maximum value: (99.9).",
+            "format" : "double"
+          },
+          "hi" : {
+            "type" : "number",
+            "description" : "Internal Relative Humidity from the sensor unit: 0.1 resolution, maximum value: (99.9).",
+            "format" : "double"
+          },
+          "pi" : {
+            "type" : "integer",
+            "description" : "Internal air pressure reading",
+            "format" : "int32"
+          },
+          "li" : {
+            "type" : "integer",
+            "description" : "Light Level Reading: 1 lux resolution, maximum value: 9999.",
+            "format" : "int32"
+          },
+          "ts" : {
+            "type" : "string",
+            "description" : "UTC time stamp when message is occurred"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "PropertyInsights" : {
+        "type" : "object",
+        "properties" : {
+          "uid" : {
+            "type" : "string",
+            "description" : "Switchee unique identifier for the property",
+            "format" : "uuid"
+          },
+          "dailyAvgRoomTemperature" : {
+            "type" : "number",
+            "description" : "Average room temperature on the context date (degrees Celsius)",
+            "format" : "double"
+          },
+          "dailyAvgRoomHumidity" : {
+            "type" : "number",
+            "description" : "Daily average relative humidity (%)",
+            "format" : "double"
+          },
+          "dailyTotalHeatingUse" : {
+            "type" : "number",
+            "description" : "Daily heating usage (Hours)",
+            "format" : "double"
+          },
+          "dailyTotalHotWaterUse" : {
+            "type" : "number",
+            "description" : "Daily hot water usage (Hours)",
+            "format" : "double"
+          },
+          "dailyMaxTargetTemperature" : {
+            "type" : "number",
+            "description" : "The highest target temperature set on the context date (degrees Celsius)",
+            "format" : "double"
+          },
+          "dailyTotalDeltaEnergyMeterUse" : {
+            "type" : "number",
+            "description" : "Energy usage reported by the energy meter for the context date (KWh)",
+            "format" : "double"
+          },
+          "dailyMaxHeatIndex" : {
+            "type" : "number",
+            "description" : "The highest \"feels like\" temperature recorded on the context date (Heat Index degrees Celsius)",
+            "format" : "double"
+          },
+          "weeklyMouldRiskPercentage" : {
+            "type" : "number",
+            "description" : "The mould risk as of the context date, calculated over a rolling 7 day window (%)",
+            "format" : "double"
+          },
+          "mouldRiskLevel" : {
+            "$ref" : "#/components/schemas/MetricsLevels"
+          },
+          "heatStrokeRiskLevel" : {
+            "$ref" : "#/components/schemas/MetricsLevels"
+          },
+          "fuelPovertyRiskLevel" : {
+            "$ref" : "#/components/schemas/MetricsLevels"
+          },
+          "contextDate" : {
+            "type" : "string",
+            "description" : "The date that the set of insights returned were calculated for",
+            "format" : "date-time"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "GetScheduleResponse" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Id of the Schedule",
+            "format" : "uuid"
+          },
+          "propId" : {
+            "type" : "integer",
+            "description" : "Id of the Property where the schedule belongs",
+            "format" : "int32"
+          },
+          "adaptedId" : {
+            "type" : "string",
+            "description" : "Id of the Schedule from which this one is adapted",
+            "format" : "uuid"
+          },
+          "ver" : {
+            "type" : "string",
+            "description" : "Version of the Schedule format"
+          },
+          "src" : {
+            "type" : "string",
+            "description" : "Creation source of the Schedule"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Demand side or user generated schedule type"
+          },
+          "created" : {
+            "type" : "string",
+            "description" : "Schedule creation time"
+          },
+          "h" : {
+            "type" : "array",
+            "description" : "Heating zones and their heating commands",
+            "items" : {
+              "$ref" : "#/components/schemas/HeatingZoneConfigurationResponse"
+            }
+          },
+          "w" : {
+            "type" : "array",
+            "description" : "Hot water commands",
+            "items" : {
+              "$ref" : "#/components/schemas/HotWaterConfigurationResponse"
+            }
+          },
+          "sts" : {
+            "type" : "string",
+            "description" : "Status of the schedule: Stored, PendingReplication, Replicated"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "GetPropertyResponse" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "uprn" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "created" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updated" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "hubId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "hubSerialNumber" : {
+            "type" : "string"
+          },
+          "hubType" : {
+            "type" : "string"
+          },
+          "dsrStatus" : {
+            "type" : "string",
+            "description" : "Status of the DSR programme\r\nValues: unknown, disabled, enabled"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "HeatingZoneConfigurationResponse" : {
+        "type" : "object",
+        "properties" : {
+          "z" : {
+            "type" : "integer",
+            "description" : "Heating zone",
+            "format" : "int32"
+          },
+          "c" : {
+            "type" : "array",
+            "description" : "Heating HeatingConfigurations",
+            "items" : {
+              "$ref" : "#/components/schemas/HeatingConfigurationResponse"
+            }
+          }
+        },
+        "additionalProperties" : false
+      },
+      "DailyPropertyInsightsModel" : {
+        "type" : "object",
+        "properties" : {
+          "pagination" : {
+            "$ref" : "#/components/schemas/Pagination"
+          },
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PropertyInsights"
+            }
+          },
+          "links" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Link"
+            }
+          }
+        },
+        "additionalProperties" : false
+      },
+      "ProblemDetails" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "detail" : {
+            "type" : "string"
+          },
+          "instance" : {
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : {
+          "type" : "object"
+        }
+      },
+      "MBusSensorData" : {
+        "type" : "object",
+        "properties" : {
+          "mbt" : {
+            "type" : "string",
+            "description" : "Type of meter 1 = Electrical 2 = Gas"
+          },
+          "mbu" : {
+            "type" : "string",
+            "description" : "Meter reading unit of measurement"
+          },
+          "mbv" : {
+            "type" : "number",
+            "description" : "Value of the reading",
+            "format" : "double"
+          },
+          "ts" : {
+            "type" : "string",
+            "description" : "UTC time stamp when message is occurred"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "MetricsLevels" : {
+        "type" : "string",
+        "description" : "Metrics Risk Levels<p>Members:</p><ul><li><i>NA</i> - Not Available </li> <li><i>Low</i> - Low risk </li> <li><i>Medium</i> - Medium Risk </li> <li><i>High</i> - High Risk </li> </ul>",
+        "enum" : [ "NA", "Low", "Medium", "High" ]
+      },
+      "PropertyReferenceRequest" : {
+        "required" : [ "propertyRef" ],
+        "type" : "object",
+        "properties" : {
+          "propertyRef" : {
+            "maxLength" : 32,
+            "minLength" : 1,
+            "pattern" : "^[a-zA-Z0-9\\-.]+$",
+            "type" : "string",
+            "description" : "Housing provider property reference,\r\nit has a 32 chars length limit and only supports alphanumeric characters, period and dash"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "HotWaterConfigurationRequest" : {
+        "type" : "object",
+        "properties" : {
+          "d" : {
+            "type" : "integer",
+            "description" : "Logical day of week (00-06 = Mon-Sun)",
+            "format" : "int32"
+          },
+          "h" : {
+            "type" : "integer",
+            "description" : "Hour of the day",
+            "format" : "int32"
+          },
+          "m" : {
+            "type" : "integer",
+            "description" : "Minutes",
+            "format" : "int32"
+          },
+          "s" : {
+            "$ref" : "#/components/schemas/WaterState"
+          },
+          "t" : {
+            "$ref" : "#/components/schemas/DSREventType"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "DSREventType" : {
+        "type" : "string",
+        "description" : "<p>Members:</p><ul><li><i>Normal</i> - DSR Normal </li> <li><i>Offpeak</i> - DSR Offpeak </li> <li><i>Peak</i> - DSR Peak </li> </ul>",
+        "enum" : [ "Normal", "Offpeak", "Peak" ]
+      },
+      "HeatingConfigurationRequest" : {
+        "type" : "object",
+        "properties" : {
+          "d" : {
+            "type" : "integer",
+            "description" : "Logical day of week (00-06 = Mon-Sun)",
+            "format" : "int32"
+          },
+          "h" : {
+            "type" : "integer",
+            "description" : "Hour of the day",
+            "format" : "int32"
+          },
+          "m" : {
+            "type" : "integer",
+            "description" : "Minutes",
+            "format" : "int32"
+          },
+          "tt" : {
+            "type" : "integer",
+            "description" : "Heating temperature on or of",
+            "format" : "int32"
+          },
+          "t" : {
+            "$ref" : "#/components/schemas/DSREventType"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "Link" : {
+        "type" : "object",
+        "properties" : {
+          "href" : {
+            "type" : "string"
+          },
+          "rel" : {
+            "type" : "string"
+          },
+          "method" : {
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "GetSchedulesResponse" : {
+        "type" : "object",
+        "properties" : {
+          "schedules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GetScheduleResponse"
+            }
+          }
+        },
+        "additionalProperties" : false
+      }
+    },
+    "securitySchemes" : {
+      "client-api-authorizer" : {
+        "type" : "apiKey",
+        "name" : "Authorization",
+        "in" : "header",
+        "x-amazon-apigateway-authtype" : "cognito_user_pools"
+      },
+      "api_key" : {
+        "type" : "apiKey",
+        "name" : "x-api-key",
+        "in" : "header"
+      }
+    }
+  }
+}
